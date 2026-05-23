@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "wrangler dev",
-    "deploy": "astro build && wrangler deploy"
+    "preview": "wrangler pages dev dist",
+    "deploy": "astro build && wrangler pages deploy dist --project-name=stakee-landing"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",

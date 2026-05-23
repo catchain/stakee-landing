@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "wrangler dev",
+    "deploy": "astro build && wrangler deploy"
   },
   "dependencies": {
-    "astro": "^5.7.0"
+    "@astrojs/cloudflare": "^12.6.13",
+    "astro": "^5.7.0",
+    "wrangler": "^4.94.0"
   }
 }

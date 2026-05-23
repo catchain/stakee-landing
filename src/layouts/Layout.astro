@@ -5,6 +5,9 @@ interface Props {
 }
 
 const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON with up to 25% APY on the most secure staking contract. Instant withdrawals, managed right in Telegram.' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
@@ -14,6 +17,21 @@ const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{title}</title>
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="Stakee" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="576" />
+  <meta property="og:image:alt" content="Stakee — earn up to 25% APY staking TON" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+  <meta name="twitter:image:alt" content="Stakee — earn up to 25% APY staking TON" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -135,7 +153,8 @@ const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON
         "nav.features": "Features",
         "nav.how": "How It Works",
         "nav.calc": "Calculator",
-        "nav.faq": "FAQ"
+        "nav.faq": "FAQ",
+        "cta.href": "https://t.me/stakee?direct"
       },
       ru: {
         "hero.title": "Отправьте TON в депозит",
@@ -188,7 +207,8 @@ const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON
         "nav.features": "Преимущества",
         "nav.how": "Как работает",
         "nav.calc": "Калькулятор",
-        "nav.faq": "FAQ"
+        "nav.faq": "FAQ",
+        "cta.href": "https://t.me/stakeeru?direct"
       }
     };
 
@@ -201,6 +221,13 @@ const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON
         const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
           el.textContent = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-href]').forEach(el => {
+        const key = el.getAttribute('data-i18n-href');
+        if (translations[lang] && translations[lang][key]) {
+          el.href = translations[lang][key];
         }
       });
 

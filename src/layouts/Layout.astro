@@ -1,0 +1,171 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON with up to 25% APY on the most secure staking contract. Instant withdrawals, managed right in Telegram.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <slot />
+
+  <script is:inline>
+    const translations = {
+      en: {
+        "hero.title": "Put your TON to work",
+        "hero.title2": "Earn up to 25% APY",
+        "hero.subtitle": "The most secure staking contract on TON with instant withdrawals. Manage everything right in Telegram.",
+        "hero.cta": "Stake Now",
+        "hero.stat.apy": "Annual Yield",
+        "hero.stat.tvl": "Total Value Locked",
+        "hero.stat.stakers": "Stakers",
+        "features.title": "Why Stakee?",
+        "features.subtitle": "Everything you need for safe and profitable TON staking",
+        "features.apy.title": "Best APY",
+        "features.apy.desc": "Earn up to 25% annual yield with daily compounding rewards on your staked TON.",
+        "features.instant.title": "Instant Withdrawals",
+        "features.instant.desc": "Get your TON back within minutes. No lock-up periods, no waiting.",
+        "features.secure.title": "Most Secure Contract",
+        "features.secure.desc": "Contract created by TON Core and audited by CertiK. Proven over time by the best developers.",
+        "features.telegram.title": "Manage in Telegram",
+        "features.telegram.desc": "Stake, unstake, and track earnings directly in Telegram. No complex interfaces needed.",
+        "how.title": "How It Works",
+        "how.subtitle": "Start earning in 3 simple steps",
+        "how.step1.title.prefix": "Open",
+        "how.step1.title.link": "Stakee Bot",
+        "how.step1.desc": "Launch our Telegram bot or connect your TON wallet on the web.",
+        "how.step2.title": "Deposit TON",
+        "how.step2.desc": "Enter the amount you want to stake and confirm the deposit in your wallet.",
+        "how.step3.title": "Earn Rewards",
+        "how.step3.desc": "Rewards accrue daily with automatic compounding. Withdraw anytime.",
+        "calc.title": "Calculate Your Earnings",
+        "calc.subtitle": "See how much you can earn with compound interest",
+        "calc.amount": "TON Amount",
+        "calc.days": "Period",
+        "calc.days.suffix": "days",
+        "calc.apy": "APY",
+        "calc.daily": "Daily rate",
+        "calc.invested": "Invested",
+        "calc.profit": "Profit",
+        "calc.total": "Total",
+        "faq.title": "Frequently Asked Questions",
+        "faq.q1": "What is Stakee?",
+        "faq.a1": "Stakee is a TON liquid staking platform that lets you earn up to 25% APY on your Toncoin. We use the most secure staking contract audited by TON Core, and you can manage everything through our Telegram bot.",
+        "faq.q2": "What APY can I expect?",
+        "faq.a2": "Current APY is up to 25% with daily compounding. The effective rate may vary slightly based on network conditions, but Stakee consistently offers the highest yields on the TON network.",
+        "faq.q3": "Is my TON safe?",
+        "faq.a3": "Yes. Stakee uses the most secure and audited staking contract on TON, developed and verified by TON Core. Your funds are never held by third parties — the smart contract handles everything.",
+        "faq.q4": "How do I withdraw?",
+        "faq.a4": "Withdrawals are instant. Simply tap \"Unstake\" in the Telegram bot or web app, and your TON will be returned to your wallet within minutes.",
+        "faq.q5": "What's the minimum stake?",
+        "faq.a5": "You can start staking with as little as 1 TON. There is no maximum limit.",
+        "nav.features": "Features",
+        "nav.how": "How It Works",
+        "nav.calc": "Calculator",
+        "nav.faq": "FAQ"
+      },
+      ru: {
+        "hero.title": "Пусть ваш TON работает",
+        "hero.title2": "До 25% годовых",
+        "hero.subtitle": "Самый безопасный контракт стейкинга на TON с мгновенным выводом. Управляйте всем прямо в Telegram.",
+        "hero.cta": "Начать стейкинг",
+        "hero.stat.apy": "Годовая доходность",
+        "hero.stat.tvl": "Заблокировано",
+        "hero.stat.stakers": "Стейкеров",
+        "features.title": "Почему Stakee?",
+        "features.subtitle": "Всё необходимое для безопасного и выгодного стейкинга TON",
+        "features.apy.title": "Лучшая доходность",
+        "features.apy.desc": "Зарабатывайте до 25% годовых с ежедневным начислением сложного процента.",
+        "features.instant.title": "Мгновенный вывод",
+        "features.instant.desc": "Получите свои TON обратно за минуты. Без блокировок и ожидания.",
+        "features.secure.title": "Безопасный контракт",
+        "features.secure.desc": "Контракт создан TON Core и аудирован CertiK. Успешно испытан временем и лучшими разработчиками.",
+        "features.telegram.title": "Управление в Telegram",
+        "features.telegram.desc": "Стейкайте, выводите и отслеживайте доход прямо в Telegram. Никаких сложных интерфейсов.",
+        "how.title": "Как это работает",
+        "how.subtitle": "Начните зарабатывать за 3 простых шага",
+        "how.step1.title.prefix": "Откройте",
+        "how.step1.title.link": "Stakee Bot",
+        "how.step1.desc": "Запустите нашего Telegram-бота или подключите TON-кошелёк на сайте.",
+        "how.step2.title": "Внесите TON",
+        "how.step2.desc": "Укажите сумму для стейкинга и подтвердите депозит в кошельке.",
+        "how.step3.title": "Получайте доход",
+        "how.step3.desc": "Награды начисляются ежедневно с автоматическим реинвестированием. Выводите в любой момент.",
+        "calc.title": "Рассчитайте доход",
+        "calc.subtitle": "Посмотрите, сколько вы можете заработать со сложным процентом",
+        "calc.amount": "Сумма в TON",
+        "calc.days": "Период",
+        "calc.days.suffix": "дн.",
+        "calc.apy": "APY",
+        "calc.daily": "Дневная ставка",
+        "calc.invested": "Вложено",
+        "calc.profit": "Прибыль",
+        "calc.total": "Итого",
+        "faq.title": "Частые вопросы",
+        "faq.q1": "Что такое Stakee?",
+        "faq.a1": "Stakee — это платформа ликвидного стейкинга TON, которая позволяет зарабатывать до 25% годовых. Мы используем самый безопасный контракт, аудированный TON Core, а управлять стейкингом можно через Telegram-бота.",
+        "faq.q2": "Какой APY можно ожидать?",
+        "faq.a2": "Текущий APY — до 25% с ежедневным начислением сложного процента. Эффективная ставка может незначительно колебаться в зависимости от условий сети, но Stakee стабильно предлагает лучшую доходность в сети TON.",
+        "faq.q3": "Безопасно ли это?",
+        "faq.a3": "Да. Stakee использует самый безопасный и проверенный контракт стейкинга на TON, разработанный и верифицированный TON Core. Ваши средства никогда не хранятся у третьих лиц — всё обрабатывает смарт-контракт.",
+        "faq.q4": "Как вывести средства?",
+        "faq.a4": "Вывод мгновенный. Просто нажмите «Вывести» в Telegram-боте или веб-приложении, и ваши TON вернутся на кошелёк за минуты.",
+        "faq.q5": "Какой минимальный стейк?",
+        "faq.a5": "Можно начать стейкинг от 1 TON. Максимального лимита нет.",
+        "nav.features": "Преимущества",
+        "nav.how": "Как работает",
+        "nav.calc": "Калькулятор",
+        "nav.faq": "FAQ"
+      }
+    };
+
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      localStorage.setItem('stakee-lang', lang);
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      const toggle = document.getElementById('lang-toggle');
+      if (toggle) {
+        toggle.textContent = lang === 'en' ? 'RU' : 'EN';
+        toggle.setAttribute('aria-label', lang === 'en' ? 'Switch to Russian' : 'Switch to English');
+      }
+
+      // Re-run calculator with new lang suffix
+      const calcDays = document.getElementById('calc-days');
+      if (calcDays) {
+        calcDays.dispatchEvent(new Event('input'));
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('stakee-lang') || 'en';
+      setLang(saved);
+
+      document.getElementById('lang-toggle')?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-lang') || 'en';
+        setLang(current === 'en' ? 'ru' : 'en');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+---
+---
+
+<section id="calculator" class="section section-alt">
+  <div class="container">
+    <div class="calc-header">
+      <h2 class="section-title" data-i18n="calc.title">Calculate Your Earnings</h2>
+      <p class="section-subtitle" data-i18n="calc.subtitle">See how much you can earn with compound interest</p>
+    </div>
+    <div class="calc-card">
+      <div class="calc-metrics">
+        <div class="calc-metric">
+          <span class="calc-metric-label" data-i18n="calc.apy">APY</span>
+          <span class="calc-metric-value accent" id="calc-apy-out">21%</span>
+        </div>
+        <div class="calc-metric">
+          <span class="calc-metric-label" data-i18n="calc.daily">Daily rate</span>
+          <span class="calc-metric-value" id="calc-daily-out">0.0528%</span>
+        </div>
+      </div>
+
+      <div class="calc-controls">
+        <div class="calc-control">
+          <div class="calc-control-header">
+            <span class="calc-control-label" data-i18n="calc.amount">TON Amount</span>
+            <span class="calc-control-value" id="calc-amount-out">1,000 TON</span>
+          </div>
+          <input type="range" id="calc-amount" min="1" max="100000" step="1" value="1000" />
+        </div>
+        <div class="calc-control">
+          <div class="calc-control-header">
+            <span class="calc-control-label" data-i18n="calc.days">Period</span>
+            <span class="calc-control-value" id="calc-days-out">365 <span data-i18n="calc.days.suffix">days</span></span>
+          </div>
+          <input type="range" id="calc-days" min="7" max="730" step="1" value="365" />
+        </div>
+      </div>
+
+      <div class="calc-results">
+        <div class="calc-result">
+          <span class="calc-result-label" data-i18n="calc.invested">Invested</span>
+          <span class="calc-result-value" id="calc-invested">$2,000</span>
+        </div>
+        <div class="calc-result">
+          <span class="calc-result-label" data-i18n="calc.profit">Profit</span>
+          <span class="calc-result-value profit" id="calc-profit">+$420</span>
+        </div>
+        <div class="calc-result">
+          <span class="calc-result-label" data-i18n="calc.total">Total</span>
+          <span class="calc-result-value" id="calc-total">$2,420</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    const APY_DISPLAY_BOOST = 1.19;
+    let apyPercent = 21;
+    let tonUsd = 2;
+
+    function getDailyRate() {
+      return Math.pow(1 + apyPercent / 100, 1 / 365) - 1;
+    }
+
+    function fmtUSD(n) {
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function fmtTON(n) {
+      return n.toLocaleString('en-US') + ' TON';
+    }
+
+    function fmtApy(n) {
+      const rounded = Math.round(n * 10) / 10;
+      return (Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(1)) + '%';
+    }
+
+    function fmtDailyRate(rate) {
+      return (rate * 100).toFixed(4) + '%';
+    }
+
+    function updateMetrics() {
+      document.getElementById('calc-apy-out').textContent = fmtApy(apyPercent);
+      document.getElementById('calc-daily-out').textContent = fmtDailyRate(getDailyRate());
+    }
+
+    function calcEarnings() {
+      const tonAmount = parseInt(document.getElementById('calc-amount').value);
+      const days = parseInt(document.getElementById('calc-days').value);
+      const usdAmount = tonAmount * tonUsd;
+      const dailyRate = getDailyRate();
+
+      const total = usdAmount * Math.pow(1 + dailyRate, days);
+      const profit = total - usdAmount;
+
+      const lang = document.documentElement.getAttribute('data-lang') || 'en';
+      const suffix = lang === 'ru' ? ' дн.' : ' days';
+
+      document.getElementById('calc-amount-out').textContent = fmtTON(tonAmount);
+      document.getElementById('calc-days-out').textContent = days + suffix;
+      document.getElementById('calc-invested').textContent = fmtUSD(usdAmount);
+      document.getElementById('calc-profit').textContent = '+' + fmtUSD(profit);
+      document.getElementById('calc-total').textContent = fmtUSD(total);
+    }
+
+    async function loadRates() {
+      try {
+        const res = await fetch('/api/calc-data');
+        if (!res.ok) return;
+
+        const data = await res.json();
+        if (typeof data.apy === 'number' && Number.isFinite(data.apy)) {
+          apyPercent = data.apy * APY_DISPLAY_BOOST;
+        }
+        if (typeof data.tonUsd === 'number' && Number.isFinite(data.tonUsd)) {
+          tonUsd = data.tonUsd;
+        }
+
+        updateMetrics();
+        calcEarnings();
+      } catch {
+        // Keep fallback values.
+      }
+    }
+
+    function updateRangeFill(input) {
+      const min = +input.min, max = +input.max, val = +input.value;
+      const pct = (val - min) / (max - min) * 100;
+      input.style.background = `linear-gradient(to right, rgba(28,141,255,0.45) ${pct}%, var(--color-bg-alt) ${pct}%)`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const amountEl = document.getElementById('calc-amount');
+      const daysEl = document.getElementById('calc-days');
+      amountEl.addEventListener('input', () => { calcEarnings(); updateRangeFill(amountEl); });
+      daysEl.addEventListener('input', () => { calcEarnings(); updateRangeFill(daysEl); });
+      updateMetrics();
+      calcEarnings();
+      updateRangeFill(amountEl);
+      updateRangeFill(daysEl);
+      loadRates();
+    });
+  })();
+</script>
+
+<style>
+  .calc-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .calc-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .calc-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 36px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .calc-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .calc-metric {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .calc-metric-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .calc-metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .calc-metric-value.accent {
+    color: var(--color-primary);
+  }
+
+  .calc-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .calc-control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .calc-control-label {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .calc-control-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .calc-control input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--color-bg-alt);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .calc-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(28, 141, 255, 0.3);
+  }
+
+  .calc-control input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(28, 141, 255, 0.3);
+  }
+
+  .calc-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .calc-result {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .calc-result-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .calc-result-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .calc-result-value.profit {
+    color: var(--color-success);
+  }
+
+  @media (max-width: 480px) {
+    .calc-card {
+      padding: 24px;
+    }
+
+    .calc-metric-value {
+      font-size: 20px;
+    }
+
+    .calc-result-value {
+      font-size: 16px;
+    }
+  }
+</style>

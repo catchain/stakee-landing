@@ -1,0 +1,98 @@
+---
+---
+
+<section id="faq" class="section">
+  <div class="container">
+    <div class="faq-header">
+      <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-i18n="faq.q1">What is Stakee?</summary>
+        <p data-i18n="faq.a1">Stakee is a TON liquid staking platform that lets you earn up to 25% APY on your Toncoin. We use the most secure staking contract audited by TON Core, and you can manage everything through our Telegram bot.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q2">What APY can I expect?</summary>
+        <p data-i18n="faq.a2">Current APY is up to 25% with daily compounding. The effective rate may vary slightly based on network conditions, but Stakee consistently offers the highest yields on the TON network.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q3">Is my TON safe?</summary>
+        <p data-i18n="faq.a3">Yes. Stakee uses the most secure and audited staking contract on TON, developed and verified by TON Core. Your funds are never held by third parties — the smart contract handles everything.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q4">How do I withdraw?</summary>
+        <p data-i18n="faq.a4">Withdrawals are instant. Simply tap "Unstake" in the Telegram bot or web app, and your TON will be returned to your wallet within minutes.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q5">What's the minimum stake?</summary>
+        <p data-i18n="faq.a5">You can start staking with as little as 1 TON. There is no maximum limit.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .faq-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .faq-item[open] {
+    box-shadow: var(--shadow-md);
+  }
+
+  .faq-item summary {
+    padding: 20px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(180deg);
+  }
+
+  .faq-item p {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+</style>

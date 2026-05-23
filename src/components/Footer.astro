@@ -1,0 +1,80 @@
+---
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-logo" aria-label="Stakee">
+      <svg width="24" height="19" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25,0 C29.418,0 33,3.582 33,8 L33,18 C33,22.418 29.418,26 25,26 L11,26 C7.591,26 4.680,23.868 3.528,20.865 C3.902,20.686 4.248,20.436 4.549,20.116 L8.989,15.399 C9.623,14.725 9.940,13.862 9.940,13 C9.940,12.138 9.623,11.275 8.989,10.601 L4.549,5.884 C4.254,5.571 3.908,5.318 3.529,5.134 C4.680,2.132 7.591,0 11,0 L25,0 Z M14.550,6.636 C14.160,6.246 13.527,6.246 13.136,6.636 C12.746,7.027 12.746,7.660 13.136,8.050 L14.251,9.165 C13.464,10.240 13,11.566 13,13 C13,14.434 13.464,15.760 14.251,16.835 L13.136,17.950 C12.746,18.340 12.746,18.973 13.136,19.364 C13.527,19.754 14.160,19.754 14.550,19.364 L15.665,18.249 C16.740,19.036 18.066,19.5 19.5,19.5 C20.934,19.5 22.260,19.036 23.335,18.249 L24.450,19.364 C24.840,19.754 25.473,19.754 25.864,19.364 C26.254,18.973 26.254,18.340 25.864,17.950 L24.749,16.835 C25.536,15.760 26,14.434 26,13 C26,11.566 25.536,10.240 24.749,9.165 L25.864,8.050 C26.254,7.660 26.254,7.027 25.864,6.636 C25.473,6.246 24.840,6.246 24.450,6.636 L23.335,7.751 C22.260,6.964 20.934,6.5 19.5,6.5 C18.066,6.5 16.740,6.964 15.665,7.751 Z M2,6.782 C2.414,6.782 2.809,6.953 3.092,7.254 L7.532,11.972 C8.076,12.550 8.076,13.450 7.532,14.028 L3.092,18.746 C2.525,19.349 1.575,19.378 0.972,18.810 C0.671,18.526 0.5,18.131 0.5,17.718 L0.5,8.282 C0.5,7.454 1.172,6.782 2,6.782 Z M19.5,8.25 C22.123,8.25 24.25,10.377 24.25,13 C24.25,15.623 22.123,17.75 19.5,17.75 C16.877,17.75 14.75,15.623 14.75,13 C14.75,10.377 16.877,8.25 19.5,8.25 Z M19.5,10.5 C18.119,10.5 17,11.619 17,13 C17,14.381 18.119,15.5 19.5,15.5 C20.881,15.5 22,14.381 22,13 C22,11.619 20.881,10.5 19.5,10.5 Z" fill="currentColor"/>
+      </svg>
+      <span class="footer-logo-text">Stakee</span>
+    </a>
+    <div class="footer-links">
+      <a href="https://t.me/StakeeBot" target="_blank" rel="noopener">Telegram Bot</a>
+      <a href="https://mytonwallet.io/" target="_blank" rel="noopener">MyTonWallet</a>
+      <a href="https://github.com/ton-blockchain/liquid-staking-contract" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding: 40px 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+  }
+
+  .footer-logo-text {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .footer-logo:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+    opacity: 1;
+  }
+
+  @media (max-width: 480px) {
+    .footer-links {
+      gap: 16px;
+    }
+  }
+</style>

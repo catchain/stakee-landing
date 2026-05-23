@@ -20,6 +20,66 @@ const { title = 'Stakee — TON Staking with Best APY', description = 'Stake TON
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <script is:inline>
+    (function() {
+      const APY_DISPLAY_BOOST = 1.19;
+      const FALLBACK = { apy: 21, tonUsd: 2, tvlTon: 14471673, totalStakers: 14000 };
+
+      window.loadStakeeData = function() {
+        if (window.__stakeeDataCache) return Promise.resolve(window.__stakeeDataCache);
+        if (window.__stakeeDataPromise) return window.__stakeeDataPromise;
+
+        window.__stakeeDataPromise = fetch('/api/calc-data')
+          .then(function(res) { return res.ok ? res.json() : null; })
+          .then(function(data) {
+            if (!data) {
+              window.__stakeeDataCache = {
+                apy: FALLBACK.apy * APY_DISPLAY_BOOST,
+                tonUsd: FALLBACK.tonUsd,
+                tvlTon: FALLBACK.tvlTon,
+                totalStakers: FALLBACK.totalStakers,
+              };
+              return window.__stakeeDataCache;
+            }
+
+            window.__stakeeDataCache = {
+              apy: typeof data.apy === 'number' ? data.apy * APY_DISPLAY_BOOST : FALLBACK.apy * APY_DISPLAY_BOOST,
+              tonUsd: typeof data.tonUsd === 'number' ? data.tonUsd : FALLBACK.tonUsd,
+              tvlTon: typeof data.tvlTon === 'number' ? data.tvlTon : FALLBACK.tvlTon,
+              totalStakers: typeof data.totalStakers === 'number' ? data.totalStakers : FALLBACK.totalStakers,
+            };
+            return window.__stakeeDataCache;
+          })
+          .catch(function() {
+            window.__stakeeDataCache = {
+              apy: FALLBACK.apy * APY_DISPLAY_BOOST,
+              tonUsd: FALLBACK.tonUsd,
+              tvlTon: FALLBACK.tvlTon,
+              totalStakers: FALLBACK.totalStakers,
+            };
+            return window.__stakeeDataCache;
+          });
+
+        return window.__stakeeDataPromise;
+      };
+
+      window.fmtApy = function(n) {
+        const rounded = Math.round(n * 10) / 10;
+        return (Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(1)) + '%';
+      };
+
+      window.fmtTvlUsd = function(tvlTon, tonUsd) {
+        const usd = tvlTon * tonUsd;
+        if (usd >= 1e9) {
+          const v = usd / 1e9;
+          return '$' + (v >= 10 ? Math.round(v) : v.toFixed(1).replace(/\.0$/, '')) + ' B';
+        }
+        if (usd >= 1e6) return '$' + Math.round(usd / 1e6).toLocaleString('en-US') + ' M';
+        if (usd >= 1e3) return '$' + Math.round(usd / 1e3).toLocaleString('en-US') + ' K';
+        return '$' + Math.round(usd).toLocaleString('en-US');
+      };
+    })();
+  </script>
   <slot />
 
   <script is:inline>

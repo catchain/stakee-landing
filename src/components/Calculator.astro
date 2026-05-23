@@ -56,7 +56,6 @@
 
 <script is:inline>
   (function() {
-    const APY_DISPLAY_BOOST = 1.19;
     let apyPercent = 21;
     let tonUsd = 2;
 
@@ -107,12 +106,11 @@
 
     async function loadRates() {
       try {
-        const res = await fetch('/api/calc-data');
-        if (!res.ok) return;
+        const data = await window.loadStakeeData();
+        if (!data) return;
 
-        const data = await res.json();
         if (typeof data.apy === 'number' && Number.isFinite(data.apy)) {
-          apyPercent = data.apy * APY_DISPLAY_BOOST;
+          apyPercent = data.apy;
         }
         if (typeof data.tonUsd === 'number' && Number.isFinite(data.tonUsd)) {
           tonUsd = data.tonUsd;

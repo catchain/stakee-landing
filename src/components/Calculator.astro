@@ -23,7 +23,7 @@
         <div class="calc-control">
           <div class="calc-control-header">
             <span class="calc-control-label" data-i18n="calc.amount">TON Amount</span>
-            <span class="calc-control-value" id="calc-amount-out">1,000 TON</span>
+            <span class="calc-control-value" id="calc-amount-out">1 000 TON</span>
           </div>
           <input type="range" id="calc-amount" min="1" max="100000" step="1" value="1000" />
         </div>
@@ -39,7 +39,7 @@
       <div class="calc-results">
         <div class="calc-result">
           <span class="calc-result-label" data-i18n="calc.invested">Invested</span>
-          <span class="calc-result-value" id="calc-invested">$2,000</span>
+          <span class="calc-result-value" id="calc-invested">$2 000</span>
         </div>
         <div class="calc-result">
           <span class="calc-result-label" data-i18n="calc.profit">Profit</span>
@@ -47,7 +47,7 @@
         </div>
         <div class="calc-result">
           <span class="calc-result-label" data-i18n="calc.total">Total</span>
-          <span class="calc-result-value" id="calc-total">$2,420</span>
+          <span class="calc-result-value" id="calc-total">$2 420</span>
         </div>
       </div>
     </div>
@@ -64,11 +64,11 @@
     }
 
     function fmtUSD(n) {
-      return '$' + Math.round(n).toLocaleString('en-US');
+      return '$' + window.fmtNum(Math.round(n));
     }
 
     function fmtTON(n) {
-      return n.toLocaleString('en-US') + ' TON';
+      return window.fmtNum(n) + ' TON';
     }
 
     function fmtApy(n) {

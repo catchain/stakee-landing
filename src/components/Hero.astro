@@ -27,7 +27,7 @@
         <span class="hero-stat-label" data-i18n="hero.stat.tvl">Total Value Locked</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-value" id="hero-stakers">14,000</span>
+        <span class="hero-stat-value" id="hero-stakers">14 000</span>
         <span class="hero-stat-label" data-i18n="hero.stat.stakers">Stakers</span>
       </div>
     </div>
@@ -45,7 +45,7 @@
 
       if (apyEl) apyEl.textContent = window.fmtApy(data.apy);
       if (tvlEl) tvlEl.textContent = window.fmtTvlUsd(data.tvlTon, data.tonUsd);
-      if (stakersEl) stakersEl.textContent = data.totalStakers.toLocaleString('en-US');
+      if (stakersEl) stakersEl.textContent = window.fmtNum(data.totalStakers);
     });
   });
 </script>

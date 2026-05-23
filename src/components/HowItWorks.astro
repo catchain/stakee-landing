@@ -102,6 +102,13 @@
     border-radius: 50%;
     margin-bottom: 20px;
     box-shadow: 0 4px 14px rgba(28, 141, 255, 0.25);
+    cursor: default;
+    user-select: none;
+  }
+
+  .step-content {
+    cursor: default;
+    user-select: none;
   }
 
   .step-content h3 {
@@ -109,6 +116,13 @@
     font-weight: 700;
     margin-bottom: 4px;
     color: var(--color-text);
+    cursor: default;
+    user-select: none;
+  }
+
+  .step-content h3 > span {
+    cursor: default;
+    user-select: none;
   }
 
   .step-bot-link {
@@ -117,6 +131,8 @@
     gap: 0.35em;
     color: var(--color-primary);
     text-decoration: none;
+    cursor: pointer;
+    user-select: auto;
     transition: opacity 0.2s;
   }
 
@@ -135,6 +151,8 @@
     font-size: 15px;
     color: var(--color-text-secondary);
     line-height: 1.5;
+    cursor: default;
+    user-select: none;
   }
 
   .step-connector {

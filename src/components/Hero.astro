@@ -51,16 +51,20 @@
 </script>
 
 <style>
+  :global(.page-top) {
+    position: relative;
+  }
+
   .hero {
     position: relative;
-    padding: 160px 0 100px;
+    padding: 112px 0 100px;
     overflow: hidden;
     text-align: center;
   }
 
   .hero-glow {
     position: absolute;
-    top: -200px;
+    top: -280px;
     left: 50%;
     transform: translateX(-50%);
     width: 800px;
@@ -137,7 +141,7 @@
 
   @media (max-width: 768px) {
     .hero {
-      padding: 120px 0 64px;
+      padding: 96px 0 64px;
     }
 
     .hero-title {

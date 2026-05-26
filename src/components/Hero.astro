@@ -12,9 +12,12 @@
       The most secure staking contract on TON with instant withdrawals. Manage everything right in Telegram.
     </p>
     <div class="hero-actions">
-      <a href="https://t.me/StakeeBot" class="btn btn-primary">
+      <a href="https://t.me/StakeeBot?start=landing" class="btn btn-primary">
         <img src="/ton.svg" alt="" class="hero-cta-icon" width="22" height="22" />
-        <span data-i18n="hero.cta">Stake Now</span>
+        <span data-i18n="hero.cta">Stake in Telegram</span>
+      </a>
+      <a href="https://app.stakee.org" class="btn btn-secondary">
+        <span data-i18n="hero.ctaSecondary">Continue on site ›</span>
       </a>
     </div>
     <div class="hero-stats">
@@ -94,9 +97,32 @@
     line-height: 1.6;
   }
 
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .hero-actions .btn {
     padding: 16px 40px;
     font-size: 18px;
+  }
+
+  .hero-actions .btn-secondary {
+    padding: 16px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: none;
+    box-shadow: none;
+  }
+
+  .hero-actions .btn-secondary:hover {
+    color: var(--color-text);
+    background: rgba(0, 0, 0, 0.04);
   }
 
   .hero-cta-icon {
@@ -158,6 +184,11 @@
       font-size: 16px;
     }
 
+    .hero-actions .btn-secondary {
+      padding: 14px 20px;
+      font-size: 14px;
+    }
+
     .hero-stats {
       gap: 32px;
       padding: 20px 24px;
@@ -185,10 +216,6 @@
     .hero-stats {
       gap: 24px;
       padding: 16px 16px;
-    }
-
-    .hero-stat-value {
-      font-size: 18px;
     }
 
     .hero-stat-label {
